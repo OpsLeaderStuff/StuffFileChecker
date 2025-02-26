@@ -1,1 +1,16 @@
-script.js
+document.getElementById("fileInput").addEventListener("change", function(event) {
+    let file = event.target.files[0]; // Get the uploaded file
+    if (!file) return;
+
+    let fileSizeKB = (file.size / 1024).toFixed(2); // Convert bytes to KB
+
+    let img = new Image();
+    img.src = URL.createObjectURL(file); // Create a URL for the image
+
+    img.onload = function() {
+        let width = img.width;
+        let height = img.height;
+        document.getElementById("output").innerHTML = 
+            `Dimensions: ${width} × ${height} pixels <br> File Size: ${fileSizeKB} KB`;
+    };
+});
